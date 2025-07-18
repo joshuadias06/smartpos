@@ -7,7 +7,9 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.terminal.smartpos.core.utils.formatAmount
@@ -18,7 +20,7 @@ import com.terminal.smartpos.presentation.components.StoreSelectorSection
 @Composable
 fun ChargeScreen(
     modifier: Modifier = Modifier,
-    storeName: String = "Loja Exemplo",
+    storeName: String = "Retail Row",
     onSwitchStore: () -> Unit = {},
     onConfirmAmount: (Int) -> Unit = {},
     onMenuClick: () -> Unit = {},
@@ -30,32 +32,50 @@ fun ChargeScreen(
         modifier = modifier
             .fillMaxSize()
             .background(Color.White)
-            .padding(16.dp)
     ) {
-        HeaderSection(onMenuClick = onMenuClick, onSyncClick = onSyncClick)
+        Column(
+            modifier = Modifier
+                .weight(1f)
+                .padding(horizontal = 24.dp, vertical = 16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Top
+        ) {
+            HeaderSection(onMenuClick = onMenuClick, onSyncClick = onSyncClick)
 
-        StoreSelectorSection(storeName = storeName, onSwitchStore = onSwitchStore)
+            Spacer(modifier = Modifier.height(12.dp))
 
-        Spacer(modifier = Modifier.height(32.dp))
+            StoreSelectorSection(storeName = storeName, onSwitchStore = onSwitchStore)
 
-        Text(
-            text = "R$ ${formatAmount(amountState.value)}",
-            fontSize = 36.sp,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.align(Alignment.CenterHorizontally)
-        )
+            Spacer(modifier = Modifier.height(24.dp))
 
-        Spacer(modifier = Modifier.height(32.dp))
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1f),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = "R$ ${formatAmount(amountState.value)}",
+                    fontSize = 46.sp,
+                    fontWeight = FontWeight.Light,
+                    fontFamily = FontFamily.SansSerif,
+                    color = Color.Black,
+                    maxLines = 1,
+                    softWrap = false,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
+        }
 
         NumericKeyboard(
             onKeyPress = { key ->
                 when (key) {
                     "OK" -> amountState.value.toIntOrNull()?.let { onConfirmAmount(it) }
-                    "DEL" -> amountState.value = amountState.value.dropLast(1)
+                    "DEL" -> if (amountState.value.isNotEmpty()) amountState.value = amountState.value.dropLast(1)
                     else -> if (amountState.value.length < 9) amountState.value += key
                 }
             }
         )
     }
 }
-
