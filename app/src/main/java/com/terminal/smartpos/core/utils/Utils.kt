@@ -1,15 +1,17 @@
 package com.terminal.smartpos.core.utils
 
+import java.text.NumberFormat
+import java.util.Locale
+
 fun formatAmount(amount: String): String {
-    if (amount.isEmpty()) return "0,00"
+    if (amount.isEmpty()) return "0,00";
 
-    val cents = amount.toLongOrNull() ?: return "0,00"
+    val cents = amount.toLongOrNull() ?: return "0,00";
 
-    val reais = cents / 100
-    val centavos = cents % 100
-    
-    return "%,d,%02d".format(reais, centavos)
-        .replace(',', 'X')
-        .replace('.', ',')
-        .replace('X', '.')
+    val value = cents / 100.0;
+
+    val formatter = NumberFormat.getCurrencyInstance(Locale("pt", "BR"));
+    val formatted = formatter.format(value);
+
+    return formatted.replace("R$", "").trim();
 }
