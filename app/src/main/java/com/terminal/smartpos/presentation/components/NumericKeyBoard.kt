@@ -2,12 +2,14 @@ package com.terminal.smartpos.presentation.components
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Backspace
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -20,7 +22,7 @@ fun NumericKeyboard(
         listOf("1", "2", "3"),
         listOf("4", "5", "6"),
         listOf("7", "8", "9"),
-        listOf("DEL", "0", "OK") // <- Invertido
+        listOf("DEL", "0", "OK")
     )
 
     Column(
@@ -38,19 +40,36 @@ fun NumericKeyboard(
                     Button(
                         onClick = { onKeyPress(key) },
                         colors = ButtonDefaults.buttonColors(
-                            containerColor = Color(0xFFF7F7F7),
-                            contentColor = Color.Black
+                            containerColor = when (key) {
+                                "OK" -> Color(0xFF007BFF)
+                                else -> Color(0xFFF7F7F7)
+                            },
+                            contentColor = when (key) {
+                                "OK" -> Color.White
+                                else -> Color.Black
+                            }
                         ),
                         shape = RoundedCornerShape(12.dp),
                         modifier = Modifier
                             .weight(1f)
                             .aspectRatio(1f)
                     ) {
-                        Text(
-                            text = key,
-                            fontSize = 24.sp,
-                            fontWeight = FontWeight.Bold
-                        )
+                        when (key) {
+                            "DEL" -> Icon(
+                                imageVector = Icons.Filled.Backspace,
+                                contentDescription = "Delete"
+                            )
+                            "OK" -> Icon(
+                                imageVector = Icons.Filled.Check,
+                                contentDescription = "OK"
+                            )
+                            else -> Text(
+                                text = key,
+                                fontSize = 24.sp,
+                                fontWeight = FontWeight.Light,
+                                fontFamily = FontFamily.SansSerif
+                            )
+                        }
                     }
                 }
             }

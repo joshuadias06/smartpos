@@ -10,6 +10,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.terminal.smartpos.core.utils.formatAmount
@@ -17,6 +18,7 @@ import com.terminal.smartpos.presentation.components.HeaderSection
 import com.terminal.smartpos.presentation.components.NumericKeyboard
 import com.terminal.smartpos.presentation.components.StoreSelectorSection
 
+@Preview(showBackground = true)
 @Composable
 fun ChargeScreen(
     modifier: Modifier = Modifier,
@@ -36,17 +38,22 @@ fun ChargeScreen(
         Column(
             modifier = Modifier
                 .weight(1f)
-                .padding(horizontal = 24.dp, vertical = 16.dp),
+                .padding(horizontal = 14.dp, vertical = 12.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Top
         ) {
+            Spacer(modifier = Modifier.height(22.dp))
+
             HeaderSection(onMenuClick = onMenuClick, onSyncClick = onSyncClick)
 
-            Spacer(modifier = Modifier.height(12.dp))
+            Spacer(modifier = Modifier.height(28.dp))
 
             StoreSelectorSection(storeName = storeName, onSwitchStore = onSwitchStore)
 
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(
+                modifier = Modifier
+                    .height(58.dp)
+            )
 
             Box(
                 modifier = Modifier

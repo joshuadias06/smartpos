@@ -11,9 +11,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.terminal.smartpos.R
 
+@Preview(showBackground = true)
 @Composable
 fun HeaderSection(
     onMenuClick: () -> Unit = {},
@@ -22,7 +24,7 @@ fun HeaderSection(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 8.dp, vertical = 4.dp),
+            .padding(horizontal = 0.dp, vertical = 4.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
@@ -33,13 +35,6 @@ fun HeaderSection(
 
             Spacer(modifier = Modifier.width(8.dp))
 
-            Image(
-                painter = painterResource(id = R.drawable.logo),
-                contentDescription = "Logo da loja",
-                modifier = Modifier
-                    .height(40.dp)
-                    .width(40.dp)
-            )
         }
 
         IconButton(onClick = onSyncClick) {

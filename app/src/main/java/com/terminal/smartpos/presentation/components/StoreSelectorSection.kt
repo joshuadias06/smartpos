@@ -1,14 +1,19 @@
 package com.terminal.smartpos.presentation.components
 
+import android.R
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
+@Preview(showBackground = true)
 @Composable
 fun StoreSelectorSection(
     storeName: String,
@@ -22,13 +27,22 @@ fun StoreSelectorSection(
     ) {
         Text(
             text = storeName,
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
+            fontSize = 26.sp,
+            fontWeight = FontWeight.Light,
+            fontFamily = FontFamily.SansSerif,
             modifier = Modifier.weight(1f)
         )
 
-        TextButton(onClick = onSwitchStore) {
-            Text("Trocar")
+        TextButton(
+            onClick = onSwitchStore,
+            colors = ButtonDefaults.textButtonColors(
+            contentColor = Color(0xFF007BFF
+            )
+        )) {
+            Text("Trocar",
+            style = MaterialTheme.typography.bodyLarge,
+            fontSize = 20.sp
+            )
         }
     }
 }
