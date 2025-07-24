@@ -1,5 +1,6 @@
 package com.terminal.smartpos.presentation.screens.charge
 
+import AppDrawerContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
@@ -18,7 +19,7 @@ import com.terminal.smartpos.presentation.components.HeaderSection
 import com.terminal.smartpos.presentation.components.NumericKeyboard
 import com.terminal.smartpos.presentation.components.StoreSelectorSection
 
-@Preview(showBackground = true)
+
 @Composable
 fun ChargeScreen(
     modifier: Modifier = Modifier,
@@ -79,10 +80,22 @@ fun ChargeScreen(
             onKeyPress = { key ->
                 when (key) {
                     "OK" -> amountState.value.toIntOrNull()?.let { onConfirmAmount(it) }
-                    "DEL" -> if (amountState.value.isNotEmpty()) amountState.value = amountState.value.dropLast(1)
-                    else -> if (amountState.value.length < 9) amountState.value += key
+                    "DEL" -> if (amountState.value.isNotEmpty()) {
+                        amountState.value = amountState.value.dropLast(1)
+                    }
+                    "CLEAR_ALL" -> amountState.value = ""
+                    else -> if (amountState.value.length < 9) {
+                        amountState.value += key
+                    }
                 }
             }
         )
+
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ChargeScreenPreview() {
+    ChargeScreen()
 }

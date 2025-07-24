@@ -14,7 +14,6 @@ import com.terminal.smartpos.presentation.components.menu.DrawerItem
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-@Preview(showBackground = true)
 fun AppDrawerContent() {
     val configuration = LocalConfiguration.current
     val screenWidthDp = configuration.screenWidthDp.dp
@@ -89,4 +88,10 @@ fun AppDrawerContent() {
             }
         }
     }
+}
+
+@Preview(showBackground = true, widthDp = 480, heightDp = 800)
+@Composable
+fun AppDrawerContentPreview() {
+    AppDrawerContent()
 }
