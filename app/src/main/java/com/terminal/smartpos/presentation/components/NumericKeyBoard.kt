@@ -53,7 +53,7 @@ fun NumericKeyboard(
                                         val down = awaitPointerEvent().changes.firstOrNull()
                                         if (down?.pressed == true) {
                                             val job = coroutineScope.launch {
-                                                delay(1500)
+                                                delay(700)
                                                 onKeyPress("CLEAR_ALL")
                                             }
 

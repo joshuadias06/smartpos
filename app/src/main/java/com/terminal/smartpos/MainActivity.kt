@@ -5,11 +5,11 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Scaffold
-import androidx.compose.ui.Modifier
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.terminal.smartpos.presentation.screens.stores.SelectStoreScreen
 import com.terminal.smartpos.presentation.theme.SmartposTheme
-
 
 class MainActivity : ComponentActivity() {
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -17,8 +17,25 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             SmartposTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) {
-                    ChargeScreenWithDrawer()
+                val navController = rememberNavController()
+
+                NavHost(navController = navController, startDestination = "charge") {
+                    composable("charge") {
+                        ChargeScreenWithDrawer(navController = navController)
+                    }
+                    composable("select_store") {
+                        SelectStoreScreen(
+                            storeList = listOf("Loja A", "Loja B", "Loja C"),
+                            currentStore = "Loja A",
+                            onStoreSelected = { selectedStore ->
+                                // TODO: Salvar loja selecionada (ViewModel, state etc)
+                                navController.popBackStack()
+                            },
+                            onBackClick = {
+                                navController.popBackStack()
+                            }
+                        )
+                    }
                 }
             }
         }

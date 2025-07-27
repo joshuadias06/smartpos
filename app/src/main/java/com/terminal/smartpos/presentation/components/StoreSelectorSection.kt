@@ -13,7 +13,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-@Preview(showBackground = true)
 @Composable
 fun StoreSelectorSection(
     storeName: String,
@@ -45,4 +44,10 @@ fun StoreSelectorSection(
             )
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun StoreSelectorSectionPreview(){
+    StoreSelectorSection(storeName = "Retail Row", onSwitchStore = {})
 }

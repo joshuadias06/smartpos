@@ -8,12 +8,15 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.terminal.smartpos.core.utils.formatAmount
 import com.terminal.smartpos.presentation.components.HeaderSection
 import com.terminal.smartpos.presentation.components.NumericKeyboard
@@ -22,6 +25,7 @@ import com.terminal.smartpos.presentation.components.StoreSelectorSection
 
 @Composable
 fun ChargeScreen(
+    navController: NavController = rememberNavController(),
     modifier: Modifier = Modifier,
     storeName: String = "Retail Row",
     onSwitchStore: () -> Unit = {},
@@ -49,12 +53,12 @@ fun ChargeScreen(
 
             Spacer(modifier = Modifier.height(28.dp))
 
-            StoreSelectorSection(storeName = storeName, onSwitchStore = onSwitchStore)
-
-            Spacer(
-                modifier = Modifier
-                    .height(58.dp)
+            StoreSelectorSection(
+                storeName = storeName,
+                onSwitchStore = onSwitchStore
             )
+
+            Spacer(modifier = Modifier.height(58.dp))
 
             Box(
                 modifier = Modifier
@@ -90,12 +94,15 @@ fun ChargeScreen(
                 }
             }
         )
-
     }
 }
 
 @Preview(showBackground = true)
 @Composable
 fun ChargeScreenPreview() {
-    ChargeScreen()
+    ChargeScreen(
+        navController = rememberNavController(),
+        onSwitchStore = {}
+    )
 }
+

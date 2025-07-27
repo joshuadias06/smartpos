@@ -90,7 +90,7 @@ fun AppDrawerContent() {
     }
 }
 
-@Preview(showBackground = true, widthDp = 480, heightDp = 800)
+@Preview(showBackground = true)
 @Composable
 fun AppDrawerContentPreview() {
     AppDrawerContent()

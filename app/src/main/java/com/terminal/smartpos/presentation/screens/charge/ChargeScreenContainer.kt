@@ -11,10 +11,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.graphics.Color
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
+import androidx.navigation.NavController
 import com.terminal.smartpos.presentation.screens.charge.ChargeScreen
 
 @Composable
-fun ChargeScreenWithDrawer() {
+fun ChargeScreenWithDrawer(navController: NavController) {
     var isDrawerOpen by remember { mutableStateOf(false) }
     val drawerWidth = LocalConfiguration.current.screenWidthDp.dp / 2
     val scope = rememberCoroutineScope()
@@ -31,9 +32,12 @@ fun ChargeScreenWithDrawer() {
 
     Box(modifier = Modifier.fillMaxSize()) {
         ChargeScreen(
+            navController = navController,
             onMenuClick = { isDrawerOpen = true },
             onSyncClick = {},
-            onSwitchStore = {},
+            onSwitchStore = {
+                navController.navigate("select_store")
+            },
             onConfirmAmount = {}
         )
 
@@ -46,7 +50,7 @@ fun ChargeScreenWithDrawer() {
                     .clickable { isDrawerOpen = false }
             )
 
-            // Drawer com detecção de swipe para fechar
+            // Drawer com swipe
             Box(
                 modifier = Modifier
                     .fillMaxHeight()
@@ -55,7 +59,7 @@ fun ChargeScreenWithDrawer() {
                     .background(Color(0xFFF7F7F7))
                     .pointerInput(Unit) {
                         detectHorizontalDragGestures { change, dragAmount ->
-                            if (dragAmount < -10) { // arrastou para a esquerda
+                            if (dragAmount < -10) {
                                 isDrawerOpen = false
                                 change.consume()
                             }
@@ -67,3 +71,4 @@ fun ChargeScreenWithDrawer() {
         }
     }
 }
+
