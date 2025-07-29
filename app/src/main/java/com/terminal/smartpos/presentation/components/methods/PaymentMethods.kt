@@ -24,8 +24,7 @@ import androidx.compose.ui.unit.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PaymentMethods(){
-
+fun PaymentMethods() {
     val containerBackgroundColor = Color(0xFFF7F7F7)
     val iconsColor = Color(0xFF007BFF)
 
@@ -38,48 +37,43 @@ fun PaymentMethods(){
         PaymentMethod("QR Code Crédito", Icons.Default.QrCode) { /* TODO */ },
     )
 
-    Row(modifier = Modifier.fillMaxSize()) {
-            Column(modifier = Modifier.padding(horizontal = 16.dp)) {
-                Text(
-                    text = "Forma de Pagamento",
-                    color = Color.Black,
-                    style = MaterialTheme.typography.titleLarge
-                )
-                Spacer(modifier = Modifier.height(10.dp))
-                methods.forEach { method ->
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+    ) {
+        Column {
+            methods.forEach { method ->
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(56.dp)
+                        .padding(vertical = 4.dp)
+                ) {
+                    Icon(
+                        imageVector = method.icon,
+                        contentDescription = method.paymentMethod,
+                        tint = iconsColor,
                         modifier = Modifier
-                            .fillMaxWidth()
-                            .height(56.dp)
-                            .padding(vertical = 4.dp)
-                    ) {
-                        Icon(
-                            imageVector = method.icon,
-                            contentDescription = method.paymentMethod,
-                            tint = iconsColor,
-                            modifier = Modifier
-                                .padding(end = 16.dp)
-                                .size(36.dp)
-                        )
-                        Text(
-                            text = method.paymentMethod,
-                            color = Color.Black,
-                            style = MaterialTheme.typography.bodyLarge,
-                            modifier = Modifier
-
-                        )
-                        Icon(
-                            imageVector = Icons.Default.KeyboardArrowRight,
-                            contentDescription = " arrowRight",
-                            tint = iconsColor,
-                            modifier = Modifier.Alignment.CenterEnd
-                        )
-                    }
+                            .padding(end = 16.dp)
+                            .size(36.dp)
+                    )
+                    Text(
+                        text = method.paymentMethod,
+                        color = Color.Black,
+                        style = MaterialTheme.typography.bodyLarge,
+                        modifier = Modifier.weight(1f)
+                    )
+                    Icon(
+                        imageVector = Icons.Default.KeyboardArrowRight,
+                        contentDescription = "arrowRight",
+                        tint = iconsColor
+                    )
                 }
             }
         }
     }
+}
 
 @Preview(showBackground = true)
 @Composable
