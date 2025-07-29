@@ -1,6 +1,5 @@
 package com.terminal.smartpos.presentation.screens.charge
 
-import AppDrawerContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
@@ -8,7 +7,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -18,9 +16,9 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.terminal.smartpos.core.utils.formatAmount
-import com.terminal.smartpos.presentation.components.HeaderSection
-import com.terminal.smartpos.presentation.components.NumericKeyboard
-import com.terminal.smartpos.presentation.components.StoreSelectorSection
+import com.terminal.smartpos.presentation.components.header.HeaderSection
+import com.terminal.smartpos.presentation.components.home.NumericKeyboard
+import com.terminal.smartpos.presentation.components.home.StoreSelectorSection
 
 
 @Composable

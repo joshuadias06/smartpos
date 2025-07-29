@@ -1,4 +1,4 @@
-package com.terminal.smartpos.presentation.components
+package com.terminal.smartpos.presentation.components.header
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons

@@ -1,4 +1,4 @@
-package com.terminal.smartpos.presentation.components
+package com.terminal.smartpos.presentation.components.home
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape

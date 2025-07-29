@@ -1,6 +1,5 @@
-package com.terminal.smartpos.presentation.components
+package com.terminal.smartpos.presentation.components.home
 
-import android.R
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
