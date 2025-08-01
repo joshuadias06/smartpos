@@ -67,7 +67,7 @@ fun InstallmentsCredit(){
                         modifier = Modifier.weight(1f)
                     )
                     Text(
-                        text = "R$ ${installment.value}",
+                        text = "R$ ${"%.2f".format(installment.value)}",
                         color = Color.Black,
                         style = MaterialTheme.typography.bodyLarge,
                         modifier = Modifier.weight(1f)
