@@ -8,6 +8,7 @@ import androidx.activity.compose.setContent
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.terminal.smartpos.presentation.screens.method.PaymentMethodScreen
 import com.terminal.smartpos.presentation.screens.stores.SelectStoreScreen
 import com.terminal.smartpos.presentation.theme.SmartposTheme
 
@@ -28,7 +29,7 @@ class MainActivity : ComponentActivity() {
                             storeList = listOf("Loja A", "Loja B", "Loja C"),
                             currentStore = "Loja A",
                             onStoreSelected = { selectedStore ->
-                                // TODO: Salvar loja selecionada (ViewModel, state etc)
+                                // TODO: salvar loja
                                 navController.popBackStack()
                             },
                             onBackClick = {
@@ -36,7 +37,11 @@ class MainActivity : ComponentActivity() {
                             }
                         )
                     }
+                    composable("payment_methods") {
+                        PaymentMethodScreen(navController = navController)
+                    }
                 }
+
             }
         }
     }

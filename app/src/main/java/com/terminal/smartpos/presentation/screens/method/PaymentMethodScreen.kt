@@ -18,12 +18,15 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.terminal.smartpos.presentation.components.methods.PaymentMethods
 import com.terminal.smartpos.presentation.components.utils.CancelButton
 
 @Composable
 fun PaymentMethodScreen(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    navController: NavController
 ) {
     Column(
         modifier = modifier
@@ -61,5 +64,6 @@ fun PaymentMethodScreen(
 @Preview(showBackground = true, device = "spec:width=320dp,height=533dp,dpi=240")
 @Composable
 fun PaymentMethodScreenPreview(){
-    PaymentMethodScreen()
+    val navController = rememberNavController()
+    PaymentMethodScreen(navController = navController)
 }

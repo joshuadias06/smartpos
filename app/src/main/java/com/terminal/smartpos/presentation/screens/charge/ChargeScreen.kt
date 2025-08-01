@@ -81,7 +81,13 @@ fun ChargeScreen(
         NumericKeyboard(
             onKeyPress = { key ->
                 when (key) {
-                    "OK" -> amountState.value.toIntOrNull()?.let { onConfirmAmount(it) }
+                    "OK" -> {
+                        val amount = amountState.value.toIntOrNull()
+                        if (amount != null && amount > 0) {
+                            onConfirmAmount(amount)
+                            navController.navigate("payment_methods")
+                        }
+                    }
                     "DEL" -> if (amountState.value.isNotEmpty()) {
                         amountState.value = amountState.value.dropLast(1)
                     }
@@ -92,6 +98,7 @@ fun ChargeScreen(
                 }
             }
         )
+
     }
 }
 

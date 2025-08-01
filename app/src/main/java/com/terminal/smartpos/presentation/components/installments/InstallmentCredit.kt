@@ -1,5 +1,6 @@
 package com.terminal.smartpos.presentation.components.installments
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -51,6 +52,7 @@ fun InstallmentsCredit(){
                         .fillMaxWidth()
                         .height(56.dp)
                         .padding(vertical = 4.dp)
+                        .clickable { installment.onClick() }
                 ) {
                     Icon(
                         imageVector = installment.icon,
@@ -64,13 +66,15 @@ fun InstallmentsCredit(){
                         text = installment.countInstallments,
                         color = Color.Black,
                         style = MaterialTheme.typography.bodyLarge,
-                        modifier = Modifier.weight(1f)
+                        modifier = Modifier
+                            .weight(1f)
                     )
                     Text(
                         text = "R$ ${"%.2f".format(installment.value)}",
                         color = Color.Black,
                         style = MaterialTheme.typography.bodyLarge,
-                        modifier = Modifier.weight(1f)
+                        modifier = Modifier
+                            .weight(1f)
                     )
                     Icon(
                         imageVector = Icons.Default.KeyboardArrowRight,
