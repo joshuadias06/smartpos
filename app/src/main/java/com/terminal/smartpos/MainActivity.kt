@@ -8,6 +8,7 @@ import androidx.activity.compose.setContent
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.terminal.smartpos.presentation.screens.installments.CreditInstallments
 import com.terminal.smartpos.presentation.screens.method.PaymentMethodScreen
 import com.terminal.smartpos.presentation.screens.stores.SelectStoreScreen
 import com.terminal.smartpos.presentation.theme.SmartposTheme
@@ -39,6 +40,12 @@ class MainActivity : ComponentActivity() {
                     }
                     composable("payment_methods") {
                         PaymentMethodScreen(navController = navController)
+                    }
+                }
+
+                NavHost(navController = navController, startDestination = "payment_method") {
+                    composable("credit_installments"){
+                        CreditInstallments(navController = navController)
                     }
                 }
 

@@ -21,67 +21,59 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun InstallmentsCredit(){
-
+fun InstallmentsCredit(amount: Double) {
     val iconsColor = Color(0xFF007BFF)
 
-    val installments = listOf(
-        InstallmentsCredit("1x", Icons.Default.CreditCard, 1.0){TODO()},
-        InstallmentsCredit("2x", Icons.Default.CreditCard, 1.0){TODO()},
-        InstallmentsCredit("3x", Icons.Default.CreditCard, 1.0){TODO()},
-        InstallmentsCredit("4x", Icons.Default.CreditCard, 1.0){TODO()},
-        InstallmentsCredit("5x", Icons.Default.CreditCard, 1.0){TODO()},
-        InstallmentsCredit("6x", Icons.Default.CreditCard, 1.0){TODO()},
-        InstallmentsCredit("7x", Icons.Default.CreditCard, 1.0){TODO()},
-        InstallmentsCredit("8x", Icons.Default.CreditCard, 1.0){TODO()},
-        InstallmentsCredit("9x", Icons.Default.CreditCard, 1.0){TODO()},
-        InstallmentsCredit("10x", Icons.Default.CreditCard, 1.0){TODO()},
-        InstallmentsCredit("11x", Icons.Default.CreditCard, 1.0){TODO()},
-        InstallmentsCredit("12x", Icons.Default.CreditCard, 1.0){TODO()}
-    )
+    val maxInstallments = when {
+        amount <= 1.0 -> 2
+        else -> 12
+    }
 
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-    ) {
-        Column {
-            installments.forEach { installment ->
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
+    val installments = (1..maxInstallments).map { i ->
+        val perInstallment = amount / i
+        InstallmentsCredit(
+            countInstallments = "${i}x",
+            icon = Icons.Default.CreditCard,
+            value = perInstallment
+        ) {
+        }
+    }
+
+    Column {
+        installments.forEach { installment ->
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(56.dp)
+                    .padding(vertical = 4.dp)
+                    .clickable { installment.onClick() }
+            ) {
+                Icon(
+                    imageVector = installment.icon,
+                    contentDescription = installment.countInstallments,
+                    tint = iconsColor,
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .height(56.dp)
-                        .padding(vertical = 4.dp)
-                        .clickable { installment.onClick() }
-                ) {
-                    Icon(
-                        imageVector = installment.icon,
-                        contentDescription = installment.countInstallments,
-                        tint = iconsColor,
-                        modifier = Modifier
-                            .padding(end = 16.dp)
-                            .size(36.dp)
-                    )
-                    Text(
-                        text = installment.countInstallments,
-                        color = Color.Black,
-                        style = MaterialTheme.typography.bodyLarge,
-                        modifier = Modifier
-                            .weight(1f)
-                    )
-                    Text(
-                        text = "R$ ${"%.2f".format(installment.value)}",
-                        color = Color.Black,
-                        style = MaterialTheme.typography.bodyLarge,
-                        modifier = Modifier
-                            .weight(1f)
-                    )
-                    Icon(
-                        imageVector = Icons.Default.KeyboardArrowRight,
-                        contentDescription = "arrowRight",
-                        tint = iconsColor
-                    )
-                }
+                        .padding(end = 16.dp)
+                        .size(36.dp)
+                )
+                Text(
+                    text = installment.countInstallments,
+                    color = Color.Black,
+                    style = MaterialTheme.typography.bodyLarge,
+                    modifier = Modifier.weight(1f)
+                )
+                Text(
+                    text = "R$ ${"%.2f".format(installment.value)}",
+                    color = Color.Black,
+                    style = MaterialTheme.typography.bodyLarge,
+                    modifier = Modifier.weight(1f)
+                )
+                Icon(
+                    imageVector = Icons.Default.KeyboardArrowRight,
+                    contentDescription = "arrowRight",
+                    tint = iconsColor
+                )
             }
         }
     }
@@ -90,5 +82,5 @@ fun InstallmentsCredit(){
 @Preview(showBackground = true)
 @Composable
 fun InstallmentsCreditPreview(){
-    InstallmentsCredit()
+    InstallmentsCredit(amount = 12.0)
 }
